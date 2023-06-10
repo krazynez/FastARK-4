@@ -41,14 +41,14 @@ while true do
 
 	---------      Prints Text Basics      ---------------------------------------------------------------------------------
 	if actived then
-		screen.print(480,10,"PSVita Actived",1,color.green,0x0,__ACENTER)
+		screen.print(480,10,"PS Vita Actived",1,color.green,0x0,__ACENTER)
 	else
-		screen.print(480,10,"PSVita NOT Actived",1,color.red,0x0,__ACENTER)
+		screen.print(480,10,"PS Vita NOT Actived",1,color.red,0x0,__ACENTER)
 	end
-	screen.print(480,35,"ARK-2 Installer",1,color.white,color.blue,__ACENTER)
+	screen.print(480,35,"ARK-4 Installer",1,color.white,color.blue,__ACENTER)
 
 	screen.print(10,10,"Count: " .. list.len,1,color.red,0x0)
-	screen.print(10,30,"Sel Clons: " .. dels,1,color.red,0x0)
+	screen.print(10,30,"Sel. Clones: " .. dels,1,color.red,0x0)
 
 	--Show size free
 	screen.print(950,10,"ux0: "..files.sizeformat(sizeUxo).." Free",1,color.white,color.blue,__ARIGHT)
@@ -97,26 +97,26 @@ while true do
 		screen.print(45,490,"Clone Game",1,color.white,color.blue)
 
 		if buttonskey2 then buttonskey2:blitsprite(5,508,1) end											--Start
-		screen.print(45,510,"Install the MINI Sasuke vs Commander & ARK2",1,color.white,color.blue)
+		screen.print(45,510,"Install the MINI Sasuke vs Commander & ARK-4",1,color.white,color.blue)
 
 		--------------------Right-------------------------------------------------------------------------------------------
 		if buttonskey then buttonskey:blitsprite(930,465,3) end											--Cirle
-		screen.print(920,468,"Delete CLON(s)",1,color.white,color.blue, __ARIGHT)
+		screen.print(920,468,"Delete CLONE(s)",1,color.white,color.blue, __ARIGHT)
 
 		if buttonskey then buttonskey:blitsprite(930,488,1) end											--Triangle
-		screen.print(920,490,"Mark/Unmark CLON(s) to be deleted",1,color.white,color.blue, __ARIGHT)
+		screen.print(920,490,"Mark/Unmark CLONE(s) to be deleted",1,color.white,color.blue, __ARIGHT)
 		
 		if dels > 0 then
 			if buttonskey then buttonskey2:blitsprite(923,508,0) end									--Select
-			screen.print(920,510,"Unmark all CLON(s)",1,color.white,color.blue, __ARIGHT)
+			screen.print(920,510,"Unmark all CLONE(s)",1,color.white,color.blue, __ARIGHT)
 		end
 
 	else
-		screen.print(10,480,"No games PSP :(")
+		screen.print(10,480,"No PSP games :(")
 		if buttonskey then
 			buttonskey:blitsprite(10,508,0)
 		end
-		screen.print(10,510,"Install the MINI Sasuke vs Commander and install ARK",1,color.white,color.blue)
+		screen.print(10,510,"Install the MINI Sasuke vs Commander and install ARK-4",1,color.white,color.blue)
 
 		if buttons.cross then 
 			if check_freespace() then install_ark_from0()
@@ -132,7 +132,7 @@ while true do
 
 		if buttons.cross and list.data[pos].flag == 1 then
 			if check_freespace() then
-				if os.message("Install ARK in the game "..list.data[pos].id.." ?",1) == 1 then
+				if os.message("Install ARK-4 in the game "..list.data[pos].id.." ?",1) == 1 then
 					status = false
 					buttons.homepopup(0)
 					install_ark(list.data[pos].path)
@@ -146,11 +146,11 @@ while true do
 		if buttons.square and list.data[pos].flag == 1 then
 			if check_freespace() then
 				delp = false
-				if os.message("Would you like to have this game cloned so you can install ARK \nor Adrenaline?",1) == 1 then
+				if os.message("Would you like to have this game cloned so you can install ARK-4 \nor Adrenaline?",1) == 1 then
 
 					if files.exists(PATHTOGAME..list.data[pos].id.."/PBOOT.PBP") then
 						local sfo = game.info(PATHTOGAME..list.data[pos].id.."/PBOOT.PBP")
-						if os.message("PBOOT.PBP: "..tostring(sfo.TITLE).." was found".."\n\nYou want to delete it ?\n\nClones will be clean ",1) == 1 then
+						if os.message("PBOOT.PBP: "..tostring(sfo.TITLE).." was found".."\n\nYou want to delete it?\n\nClones will be clean ",1) == 1 then
 							delp = true
 						end
 					end
@@ -170,18 +170,18 @@ while true do
 
 		if buttons.circle and list.data[pos].clon == "©" then
 			if list.data[pos].del then
-				if os.message("Delete(s) "..dels.." this CLON(s) ??",1) == 1 then
+				if os.message("Delete(s) "..dels.." this CLONE(s) ??",1) == 1 then
 					buttons.homepopup(0)
 					for i=1,list.len do
 						if list.data[i].del then
 							delete_bubble(list.data[i].id)
 						end
 					end
-					os.message("Ready..."..dels.."\n\nCLON(s) Eliminated(s)")
+					os.message("Ready..."..dels.."\n\nCLONE(s) Eliminated(s)")
 					update_db(false)
 				end
 			elseif dels==0  then
-				if os.message("Delete this CLON: "..list.data[pos].id.." ?",1) == 1 then
+				if os.message("Delete this CLONE: "..list.data[pos].id.." ?",1) == 1 then
 					buttons.homepopup(0)
 					delete_bubble(list.data[pos].id)
 					update_db(false)
