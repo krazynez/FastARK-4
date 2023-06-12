@@ -4,23 +4,18 @@
 		<image>bg0.png</image>
 	</livearea-background>
 	<gate>
+		<startup-image>startup.png</startup-image>
 	</gate>
 
 	<frame id="frame1" multi="o" autoflip="0" >
 		<liveitem>
 			<image align="left" width="99" height="99" origin="frame">frame_icon.png</image>
 
-			<text origin="image" align="outside-right">
+			<text origin="image" align="outside-right" margin-bottom="1">
+				<str color="#ffffff" size="20"> Documentation </str>
 			</text>
-			<lang>es</lang>
 
-		</liveitem>
-		<liveitem>
-			<image align="left" width="99" height="99" origin="frame">frame_icon.png</image>
-
-			<text origin="image" align="outside-right">
-			</text>
-			<exclude-lang>es</exclude-lang>
+			<target>https://github.com/PSP-Archive/ARK-4</target>
 
 		</liveitem>
 	</frame>
@@ -29,12 +24,11 @@
 		<liveitem>
 			<text origin="background" line-align="center" margin-bottom="1">
 				<str size="25" bold="on" shadow="on">　</str>
-				<str size="40" bold="on" shadow="on">ARK Fast for 3.60</str> 
+				<str size="40" bold="on" shadow="on">FastARK-4</str>
 				<str size="25" bold="on" shadow="on">　
 				</str>
 				<str size="21" bold="on" shadow="on">
-					ARK Installer v2.3
-					®2017 Team ONElua - ONElua.x10.mx
+					®2023 - ARK-4 Team
 				</str>
 			</text>
 			<lang>es</lang>
@@ -42,12 +36,11 @@
 		<liveitem>
 			<text origin="background" line-align="center" margin-bottom="1">
 				<str size="30" bold="on" shadow="on">　</str>
-				<str size="40" bold="on" shadow="on">ARK Fast for 3.60</str> 
+				<str size="40" bold="on" shadow="on">FastARK-4</str>
 				<str size="30" bold="on" shadow="on">　
 				</str>
 				<str size="21" bold="on" shadow="on">
-					ARK Installer v2.3
-					®2017 Team ONElua - ONElua.x10.mx
+					®2023 - ARK-4 Team
 				</str>
 			</text>
 			<exclude-lang>es</exclude-lang>

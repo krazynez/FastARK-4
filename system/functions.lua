@@ -1,8 +1,47 @@
 --------------------Check your Games (ONLY PSP GAMES)-----------------------------------------------------------------------
 list = {data = {}, len = 0, icons = {}, picons = {} }
+filenames = { fn = {}, len = 0 }
+
+
+function get_filenames()
+	if files.listfiles(PATHTOLICENSE) == nil then 
+		os.message("Could not find valid RIF, using fake license.\nYour bubble will only work with henkaku")
+	end
+	return files.listfiles(PATHTOLICENSE)[1].path
+end
+
+
+function copy_license()
+	local test = files.copy(get_filenames(), "ux0:/pspemu/bgdl/00000004/NPUG80318/sce_sys/package/")
+	if test < 1 then
+		os.message("Copying RIF\n"..files.listfiles(PATHTOLICENSE)[1].name.."\nfailed!")
+		buttons.homepopup(1)
+		return false
+	else
+		if files.exists("ux0:/pspemu/bgdl/00000004/NPUG80318/sce_sys/package/work.bin") then
+			local test2 = files.delete("ux0:/pspemu/bgdl/00000004/NPUG80318/sce_sys/package/work.bin")
+		end
+		local test3 = 0
+		local keep = files.cdir()
+		files.cdir("ux0:/pspemu/bgdl/00000004/NPUG80318/sce_sys/package/")
+		test3 = files.rename(files.listfiles(PATHTOLICENSE)[1].name, "work.bin")
+		if test3 > 0 then
+			os.message("Successfully copied RIF file.")
+		else
+			os.message("Moving RIF\n"..files.listfiles(PATHTOLICENSE)[1].name.."\nfailed!")
+			buttons.homepopup(1)
+			return false
+		end
+
+		files.cdir(keep)
+		
+		return true
+		
+	end
+end
 
 function reload_list()
-	list.data = game.list(__PSPEMU)
+	list.data = game.list(__GAME_LIST_PSPEMU)
 	table.sort(list.data ,function (a,b) return string.lower(a.id)<string.lower(b.id); end)
 
 	list.len = #list.data

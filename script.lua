@@ -24,6 +24,7 @@ mgsid=""
 PATHTONPUZ = "ux0:pspemu/PSP/GAME/NPUZ00146"
 PATHTOGAME = "ux0:pspemu/PSP/GAME/"
 PATHTOCLON = "ur0:appmeta/"
+PATHTOLICENSE = "ux0:pspemu/PSP/LICENSE/"
 
 dofile("system/ark.lua")
 dofile("system/functions.lua")

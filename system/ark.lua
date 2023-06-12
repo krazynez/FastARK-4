@@ -7,17 +7,34 @@ function install_ark(_path)
 	if not files.exists(_path) then	files.mkdir(_path) end
 	if files.exists(_path.."/PBOOT.PBP") then files.rename(_path.."/PBOOT.PBP", "PBOOTXYZ.PBP") end
 	files.copy(files.cdir().."/resources/PBOOT.PBP",_path)
+	os.message('Successfully installed ARK')
 end
+
 
 ------Install PSP MINI NPUZ00146 (include ARK_01234 & PBOOT)
 function install_ark_from0()
 	buttons.homepopup(0)
+	if files.exists("resources/NPUZ00146/files_1.zip") and files.exists("resources/NPUZ00146/files_2.zip") then
 		files.extract("resources/NPUZ00146/files_1.zip","ux0:/bgdl/t")
 		files.extract("resources/NPUZ00146/files_2.zip","ux0:/pspemu/bgdl")
-		install_ark(PATHTONPUZ)
+	else
+		os.message("Looks like NPUZ00146 is missing. :-(")
+		buttons.homepopup(1)
+		return
+	end
+		---f = System.listDirectory("ux0:/pspemu/PSP/LICENSE")
+		---if files.exists("ux0:/pspemu/PSP/LICENSE/*.rif") then
+			--for filename in lsf.dir("ux0:/pspemu/PSP/LICENSE") do
+			--	license = filename
+			--	break
+			--end
+		---end
+	
+	install_ark(PATHTONPUZ)
+	copy_license()
 
-		os.message("Your PSVita will restart...\n Remember to activate henkaku again",0)
-		os.delay(2500)
+	os.message("Your PSVita will restart...\n Remember to activate henkaku again",0)
+	os.delay(2500)
 	buttons.homepopup(1)
 	power.restart()
 end
