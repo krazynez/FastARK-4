@@ -17,7 +17,7 @@ back = image.load("back.png")
 buttonskey = image.load("buttons.png",20,20)
 buttonskey2 = image.load("buttons2.png",30,20)
 status,sizeUxo,clon,pos,dels=false,0,0,1,0
-actived = files.exists("tm0:npdrm/act.dat")
+actfile = files.exists("tm0:npdrm/act.dat")
 mgsid=""
 
 --constants
@@ -40,14 +40,14 @@ while true do
 	if back then back:blit(0,0) end
 
 	---------      Prints Text Basics      ---------------------------------------------------------------------------------
-	if actived then
-		screen.print(480,10,"PS Vita Actived",1,color.green,0x0,__ACENTER)
+	if actfile then
+		screen.print(480,10,"PS Vita is activated",1,color.green,0x0,__ACENTER)
 	else
-		screen.print(480,10,"PS Vita NOT Actived",1,color.red,0x0,__ACENTER)
+		screen.print(480,10,"PS Vita is NOT activated",1,color.red,0x0,__ACENTER)
 	end
 	screen.print(480,35,"ARK-4 Installer",1,color.white,color.blue,__ACENTER)
 
-	screen.print(10,10,"Count: " .. list.len,1,color.red,0x0)
+	screen.print(10,10,"Games Count: " .. list.len,1,color.red,0x0)
 	screen.print(10,30,"Sel. Clones: " .. dels,1,color.red,0x0)
 
 	--Show size free
@@ -97,7 +97,7 @@ while true do
 		screen.print(45,490,"Clone Game",1,color.white,color.blue)
 
 		if buttonskey2 then buttonskey2:blitsprite(5,508,1) end											--Start
-		screen.print(45,510,"Install the MINI Sasuke vs Commander & ARK-4",1,color.white,color.blue)
+		screen.print(45,510,"Install the MINIS Sasuke vs Commander & ARK-4",1,color.white,color.blue)
 
 		--------------------Right-------------------------------------------------------------------------------------------
 		if buttonskey then buttonskey:blitsprite(930,465,3) end											--Cirle
@@ -116,7 +116,7 @@ while true do
 		if buttonskey then
 			buttonskey:blitsprite(10,508,0)
 		end
-		screen.print(10,510,"Install the MINI Sasuke vs Commander and install ARK-4",1,color.white,color.blue)
+		screen.print(10,510,"Install the MINIS Sasuke vs Commander and install ARK-4",1,color.white,color.blue)
 
 		if buttons.cross then 
 			if check_freespace() then install_ark_from0()
@@ -201,7 +201,7 @@ while true do
 		if buttons.start then
 			if check_freespace() then
 				if files.exists(PATHTONPUZ.."/EBOOT.PBP") then
-					os.message("The MINI Sasuke vs Commander is already installed",0)
+					os.message("The MINIS Sasuke vs Commander is already installed",0)
 				else
 					install_ark_from0()
 				end
