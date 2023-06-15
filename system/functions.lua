@@ -2,33 +2,67 @@
 list = {data = {}, len = 0, icons = {}, picons = {} }
 filenames = { fn = {}, len = 0 }
 
+function find_license()
+	local pos = 1
+	buttons.homepopup(1)
+	buttons.interval(10,10)
+	while true do
+		buttons.read()
+		if back then back:blit(0,0) end
+		screen.print(40, 20, "Please choose a License:")
 
-function get_filenames()
-	if files.listfiles(PATHTOLICENSE) == nil then 
-		os.message("Could not find valid RIF, using fake license.\nYour bubble will only work with henkaku")
+		local y = 85
+		for i=pos, math.minmax(#files.listfiles(PATHTOLICENSE),1, #files.listfiles(PATHTOLICENSE)) do
+			if i == pos and i < 10 then 
+				screen.print(10,y," "..i.."  ->") 
+			else if i == pos and i > 9 then
+				screen.print(10,y,i.." ->") 
+			end
+			end
+			screen.print(65,y,files.listfiles(PATHTOLICENSE)[i].name or "unk")
+			y += 20
+		end
+		
+		if buttons.up and pos > 1 then pos -= 1 end
+		if buttons.down and pos < #files.listfiles(PATHTOLICENSE) then pos += 1 end
+
+		if buttons.cross then
+			return files.listfiles(PATHTOLICENSE)[pos]
+		end
+		if buttons.circle then
+			return "cancelled"
+		end
+		if buttons.held.square then
+			screen.print(600, 500, "Oh.... Hey you \nfound me good job ;-)")
+		end
+		screen.print(40, 500, "Press X to confirm")
+		screen.print(400, 500, "Press O to Cancel")
+		screen.flip()
 	end
-	return files.listfiles(PATHTOLICENSE)[1].path
 end
 
-
-function copy_license()
-	local test = files.copy(get_filenames(), "ux0:/pspemu/bgdl/00000004/NPUG80318/sce_sys/package/")
+function copy_license(license)
+	if license == nil then
+		os.message("Could not find valid RIF, using fake license.\nYour bubble will only work with henkaku")
+		return false
+	end
+	local test = files.copy(license.path, "ux0:/pspemu/bgdl/00000004/NPUG80318/sce_sys/package/")
 	if test < 1 then
-		os.message("Copying RIF\n"..files.listfiles(PATHTOLICENSE)[1].name.."\nfailed!")
+		os.message("Copying RIF\n"..license.name.."\nfailed!")
 		buttons.homepopup(1)
 		return false
 	else
 		if files.exists("ux0:/pspemu/bgdl/00000004/NPUG80318/sce_sys/package/work.bin") then
 			local test2 = files.delete("ux0:/pspemu/bgdl/00000004/NPUG80318/sce_sys/package/work.bin")
 		end
-		local test3 = 0
 		local keep = files.cdir()
 		files.cdir("ux0:/pspemu/bgdl/00000004/NPUG80318/sce_sys/package/")
-		test3 = files.rename(files.listfiles(PATHTOLICENSE)[1].name, "work.bin")
+		local test3 = files.rename(license.name, "work.bin")
+		
 		if test3 > 0 then
 			os.message("Successfully copied RIF file.")
 		else
-			os.message("Moving RIF\n"..files.listfiles(PATHTOLICENSE)[1].name.."\nfailed!")
+			os.message("Moving RIF\n"..license.name.."\nfailed!")
 			buttons.homepopup(1)
 			return false
 		end
