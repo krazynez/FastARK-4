@@ -117,7 +117,7 @@ while true do
 		if buttonskey then
 			buttonskey:blitsprite(10,508,0)
 		end
-		screen.print(10,510,"Install the MINIS Sasuke vs Commander and install ARK-4",1,color.white,color.blue)
+		screen.print(50,510,"Install the MINIS Sasuke vs Commander and install ARK-4",1,color.white,color.blue)
 
 		if buttons.cross then 
 			if check_freespace() then install_ark_from0()
