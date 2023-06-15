@@ -22,18 +22,26 @@ function install_ark_from0()
 		buttons.homepopup(1)
 		return
 	end
-		---f = System.listDirectory("ux0:/pspemu/PSP/LICENSE")
-		---if files.exists("ux0:/pspemu/PSP/LICENSE/*.rif") then
-			--for filename in lsf.dir("ux0:/pspemu/PSP/LICENSE") do
-			--	license = filename
-			--	break
-			--end
-		---end
-	
-	install_ark(PATHTONPUZ)
-	copy_license()
 
-	os.message("Your PSVita will restart...\n Remember to activate henkaku again",0)
+	install_ark(PATHTONPUZ)
+
+	local license = find_license()
+	if license == "cancelled" then
+		local choice = os.message("You chose to use fake license instead\nYour bubble will only work with henkaku.\nAre you sure you don't want to use a real license?", 1)
+		if choice > 0 then
+			license = nil
+		else
+			license = find_license()
+			copy_license(license)
+		end
+	end
+
+	if license == nil or license == "cancelled" then
+		os.message("Your PSVita will restart...\n Remember to activate henkaku again",0)
+	else
+		os.message("Your PSVita will restart...",0)
+	end
+
 	os.delay(2500)
 	buttons.homepopup(1)
 	power.restart()
