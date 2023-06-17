@@ -117,7 +117,11 @@ while true do
 		if buttonskey then
 			buttonskey:blitsprite(10,508,0)
 		end
+		
 		screen.print(50,510,"Install the MINIS Sasuke vs Commander and install ARK-4",1,color.white,color.blue)
+
+		screen.print(850, 510, "Credits",1,color.white,color.blue)
+		buttonskey2:blitsprite(930,510,3)
 
 		if buttons.cross then 
 			if check_freespace() then install_ark_from0()
@@ -130,6 +134,7 @@ while true do
 	---------Controls-------------------------------------------------------------------------------------------------------
 		if (buttons.up or buttons.analogly < -60) and pos > 1 then pos -= 1 end
 		if (buttons.down or buttons.analogly > 60) and pos < list.len then pos += 1 end
+		
 
 		if buttons.cross and list.data[pos].flag == 1 then
 			if check_freespace() then
@@ -163,7 +168,13 @@ while true do
 				os.message("Not Enough Memory (minimum 40 MB)")
 			end		
 		end
-
+		if list.len > 0 then
+			screen.print(850, 442, "Credits",1,color.white,color.blue)
+			buttonskey2:blitsprite(930,442,3)
+		end
+		if buttons.held.r then
+			credits()
+		end
 		if buttons.triangle and list.data[pos].clon == "©" then
 			list.data[pos].del = not list.data[pos].del
 			if list.data[pos].del then dels+=1 else dels-=1 end
