@@ -44,6 +44,12 @@ function install_ark_from0()
 
 	os.delay(2500)
 	buttons.homepopup(1)
+
+	local rebuilddb = os.message("\nDo you want to rebuild the livearea database?\nSometimes the ARK bubble does not show.\nThis tends to fix it.\n", 1)
+	if rebuilddb > 0 then
+		os.rebuilddb()
+	end
+	
 	power.restart()
 end
 
