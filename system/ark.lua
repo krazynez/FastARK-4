@@ -38,24 +38,18 @@ function install_ark_from0()
 
 	if license == nil or license == "cancelled" then
 		os.message("Your PSVita will restart...\n Remember to activate henkaku again",0)
-	else
-		os.message("Your PSVita will restart...",0)
 	end
 
 	os.delay(2500)
 	buttons.homepopup(1)
 
-	local rebuilddb = os.message("\nDo you want to rebuild the livearea database?\nSometimes the ARK bubble does not show.\nThis tends to fix it.\n", 1)
-	if rebuilddb > 0 then
-		os.rebuilddb()
-	end
-	
+	os.message('PS Vita will restart and finish installing ARK-4')
 	power.restart()
 end
 
 function msg_memory(files_to_delete)
 	files.delete(files_to_delete)
-	os.message("Created "..count.." Clones\n\nTo eliminate Cloned bubbles please do it with ArkFast")
+	os.message("Created "..count.." Clones\n\nTo eliminate Cloned bubbles please do it with FastARK-4")
 	update_db(false)
 end
 
