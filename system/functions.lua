@@ -49,12 +49,15 @@ function find_license()
 		for i=pos, math.minmax(#files.listfiles(PATHTOLICENSE),1, #files.listfiles(PATHTOLICENSE)) do
 			if i == pos and i < 10 then 
 				screen.print(10,y," "..i.."  ->") 
-			else if i == pos and i > 9 then
+			elseif i == pos and i > 9 then
 				screen.print(10,y,i.." ->") 
 			end
+			if #files.listfiles(PATHTOLICENSE) == 0 or #files.listfiles(PATHTOLICENSE) == nil then
+				return "no_license_found"
+			else
+				screen.print(65,y,files.listfiles(PATHTOLICENSE)[i].name or "unk")
+				y += 20
 			end
-			screen.print(65,y,files.listfiles(PATHTOLICENSE)[i].name or "unk")
-			y += 20
 		end
 		
 		if buttons.up and pos > 1 then pos -= 1 end
@@ -78,7 +81,6 @@ end
 function copy_license(license)
 	if license == nil then
 		os.message("Could not find valid RIF, using fake license.\nYour bubble will only work with henkaku")
-		return false
 	end
 	local test = files.copy(license.path, "ux0:/pspemu/bgdl/00000004/NPUG80318/sce_sys/package/")
 	if test < 1 then

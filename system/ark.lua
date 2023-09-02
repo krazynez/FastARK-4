@@ -26,7 +26,10 @@ function install_ark_from0()
 	install_ark(PATHTONPUZ)
 
 	local license = find_license()
-	if license == "cancelled" then
+	if license == "no_license_found" then
+		local choice = os.message("No Licenses found, using a fake license instead.\nYour bubble will only work with henkaku.")
+		license = nil
+	elseif license == "cancelled" then
 		local choice = os.message("You chose to use fake license instead\nYour bubble will only work with henkaku.\nAre you sure you don't want to use a real license?", 1)
 		if choice > 0 then
 			license = nil
@@ -37,7 +40,8 @@ function install_ark_from0()
 	end
 
 	if license == nil or license == "cancelled" then
-		os.message("Your PSVita will restart...\n Remember to activate henkaku again",0)
+		os.message("Your PSVita will restart and finish installing ARK-4\n Remember to activate henkaku again",0)
+		power.restart()
 	end
 
 	os.delay(2500)
