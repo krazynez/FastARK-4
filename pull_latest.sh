@@ -5,6 +5,10 @@
 # Date  : August 26, 2023
 #
 
+if [-f "FastARK-4.vpk" ]; then
+	rm "FastARK-4.vpk"
+fi
+
 curl_check=$(command -v curl)
 curl_ret=$?
 if [ $curl_ret == 0 ]; then
